@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
@@ -19,9 +22,12 @@ public class Pessoa implements Serializable {
     @Column(name = "id_pessoa")
     private long id;
 
+    @NotBlank
     @Column(name = "nome_completo")
     private String nome;
 
+    @Min(0)
+    @Max(150)
     @Column(name = "idade")
     private int idade;
 
