@@ -20,7 +20,7 @@ public class PessoaController {
     private final PessoaService pessoaService;
 
     @PostMapping("/create")
-    public ResponseEntity<PessoaDto> salvarPessoa(@RequestParam PessoaCreateDto pessoaCreateDto){
+    public ResponseEntity<PessoaDto> salvarPessoa(@RequestBody PessoaCreateDto pessoaCreateDto){
         PessoaDto pessoaDto = pessoaService.salvarPessoa(pessoaCreateDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pessoaDto.getId()).toUri();
         return ResponseEntity.created(uri).body(pessoaDto);
