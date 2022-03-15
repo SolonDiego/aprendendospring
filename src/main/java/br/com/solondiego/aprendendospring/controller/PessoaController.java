@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class PessoaController {
     private final PessoaService pessoaService;
 
     @PostMapping("/create")
-    public ResponseEntity<PessoaDto> salvarPessoa(@RequestBody PessoaCreateDto pessoaCreateDto){
+    public @ResponseBody ResponseEntity<PessoaDto> salvarPessoa(@Valid PessoaCreateDto pessoaCreateDto){
         PessoaDto pessoaDto = pessoaService.salvarPessoa(pessoaCreateDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pessoaDto.getId()).toUri();
         return ResponseEntity.created(uri).body(pessoaDto);
